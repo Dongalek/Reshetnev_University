@@ -4,7 +4,7 @@ class Cars:
         self.marka  = ''
 
 baza = open("baza.txt.", encoding="utf-8").read()
-with open('baza.txt') as f:
+with open('baza.txt') as f: //считывыет файл, проверка гита
     lines = f.readlines()
 count = len(lines)
 
