@@ -8,63 +8,47 @@ with open('baza.txt') as f:
     lines = f.readlines()
 count = len(lines)
 
-command_list = ['Список доступных команд:'," - Добавить машину", " - Вывести список машин", ' - Изменить', ' - Удалить', ' - Поиск по характеристике']
+command_list = ['Список доступных команд:'," 1) Добавить машину", " 2) Вывести список машин", ' 3) Изменить', ' 4) Удалить', ' 5) Поиск по характеристике']
 for i in range(len(command_list)):
         print(command_list[i])
 
 command = str(input())
-head = ['Позиция','Марка', 'Модель', 'Цвет', 'Гос.номер', 'Находится на стоянке']
-if command == 'Добавить машину':
-    car = Cars('Car')
+if command == '1':
     f = open('baza.txt', 'a',encoding="utf-8" )
-    count = str(count + 1)
-    f.write(count)
-    f.write(' ')
-    print('Введите марку')
-    car.marka = str(input())
-    f.write(car.marka)
-    f.write(' ')
-    print('Введите модель')
-    car.model = str(input())
-    f.write(car.model)
-    f.write(' ')
-    print('Введите цвет машины')
-    car.color = str(input())
-    f.write(car.color)
-    f.write(' ')
-    print('Введите государственный номер')
-    car.numb = str(input())
-    f.write(car.numb)
-    f.write(' ')
-    print('Машина находится на стоянке?')
-    car.place = str(input())
-    f.write(car.place)
-    f.write(' ')
-
+    car_properties = [str(count + 1)]
+    for e in ['Введите марку', 'Введите модель', 'Введите цвет машины', 'Введите государственный номер', 'Машина находится на стоянке?']:
+        print(e)
+        car_properties.append(str(input()))
+    for element in car_properties:
+        f.write(element + " ")
     f.write("\n")
     f.close()
-if command == 'Вывести список машин':
+elif command == '2':
     print(baza)
-if command == 'Изменить':
+elif command == '3':
     with open('baza.txt',encoding="utf-8") as f:
         array = [row.strip() for row in f]
         for i in range(len(array)):
             a = (array[i]).split(' ')
             array[i] = a
+    print(baza)
     print('Введите позицию машины, харрактиристику которой хотите изменить')
     num = int(input())
     print('Какую харрактеристику вы хотели бы изменить?')
     characteristic = str(input())
     if characteristic == 'Марка':
         n_characteristic = 1
-    if characteristic == 'Модель':
+    elif characteristic == 'Модель':
         n_characteristic = 2
-    if characteristic == 'Цвет':
+    elif characteristic == 'Цвет':
         n_characteristic = 3
-    if characteristic == 'Гос.номер':
+    elif characteristic == 'Гос.номер':
         n_characteristic = 4
-    if characteristic == 'Находится на стоянке':
+    elif characteristic == 'Находится на стоянке':
         n_characteristic = 5
+    else:
+        print("Такой комманды не существует")
+        exit()
     print('Введите новую характеристику')
     new_characteristic = str(input())
     for i in range(len(array)):
@@ -82,12 +66,13 @@ if command == 'Изменить':
         f.write(str(array2[i]))
         f.write('\n')
     f.close()
-if command == 'Удалить':
+elif command == '4':
     with open('baza.txt', encoding="utf-8") as f:
         array3 = [row.strip() for row in f]
         for i in range(len(array3)):
             a = (array3[i]).split(' ')
             array3[i] = a
+    print(baza)
     print('Введите позицию машины, которую хотите удалить')
     num2 = int(input())
     array4 = []
@@ -106,7 +91,7 @@ if command == 'Удалить':
         f.write(str(array4[i]))
         f.write('\n')
     f.close()
-if command == "Поиск по характеристике":
+elif command == "5":
     print('Введите название характеристики, по которой хотите найти машину')
     characteristic = str(input())
     print('Введите саму характеристику')
@@ -114,13 +99,13 @@ if command == "Поиск по характеристике":
     n_characteristic = 0
     if characteristic == 'Марка':
          n_characteristic = 1
-    if characteristic == 'Модель':
+    elif characteristic == 'Модель':
          n_characteristic = 2
-    if characteristic == 'Цвет':
+    elif characteristic == 'Цвет':
         n_characteristic = 3
-    if characteristic == 'Гос.номер':
+    elif characteristic == 'Гос.номер':
         n_characteristic = 4
-    if characteristic == 'Находится на стоянке':
+    elif characteristic == 'Находится на стоянке':
         n_characteristic = 5
     with open('baza.txt',encoding="utf-8") as f:
         array = [row.strip() for row in f]
@@ -137,3 +122,5 @@ if command == "Поиск по характеристике":
         for j in range(len(array2[i])):
             c += array2[i][j] + ' '
         print(c)
+else:
+    print("Введеной вами команды не существует")
